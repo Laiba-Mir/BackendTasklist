@@ -3,8 +3,8 @@ const Task = require('../models/taskModel');
 // Create a new task
 const createTask = async (req, res) => {
   try {
-    const { title, description, attachment, startDate, endDate, user, status } = req.body;
-    const task = new Task({ title, description, attachment, startDate, endDate, user, status });
+    const { title, description, startDate, endDate } = req.body;
+    const task = new Task({ title, description, startDate, endDate });
     await task.save();
     res.status(201).json(task);
   } catch (error) {
@@ -60,17 +60,41 @@ const updateTask = async (req, res) => {
 };
 
 // Delete a task by ID
+// const deleteTask = async (req, res) => {
+//   try {
+//     const { taskId } = req.params;
+//     console.log(taskId);
+//     const deletedTask = await Task.findByIdAndDelete(taskId);
+//     if (!deletedTask) {
+//       return res.status(404).json({ message: 'Task not found' });
+//     }
+//     res.status(200).json({ message: 'Task deleted successfully' });
+//   } catch (error) {
+//     console.error('Error deleting task:', error);
+//     res.status(500).json({ message: 'Internal server error' });
+//   }
+// };
+
+
+// Delete a task by ID
 const deleteTask = async (req, res) => {
   try {
-    const { taskId } = req.params;
-    const deletedTask = await Task.findByIdAndDelete(taskId);
-    if (!deletedTask) {
-      return res.status(404).json({ message: 'Task not found' });
+    const taskId = req.params.id;
+    
+    // Check if the task exists
+    const task = await Task.findById(taskId);
+    if (!task) {
+      return res.status(404).json({ error: 'Task not found' });
     }
+    
+    // Delete the task
+    await Task.findByIdAndDelete(taskId);
+    
+    // Respond with success message
     res.status(200).json({ message: 'Task deleted successfully' });
   } catch (error) {
     console.error('Error deleting task:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
@@ -79,7 +103,7 @@ const deleteTask = async (req, res) => {
 const getTasks = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const pageSize = 5; // Number of tasks per page
+    const pageSize = 6; // Number of tasks per page
     const skip = (page - 1) * pageSize;
 
     const tasks = await Task.find().skip(skip).limit(pageSize);

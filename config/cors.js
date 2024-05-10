@@ -2,7 +2,7 @@
 const cors = require("cors");
 
 // Define whitelist of allowed origins
-const whitelist = ["http://localhost:3000", "*"];
+const whitelist = ["http://localhost:5174", "*"];
 
 // Configure CORS options
 const corsOptions = {
