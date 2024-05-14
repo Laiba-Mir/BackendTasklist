@@ -24,6 +24,13 @@ const getAllTasks = async (req, res) => {
   }
 };
 
+
+
+
+
+
+
+
 // Get a single task by ID
 const getTaskById = async (req, res) => {
   try {
@@ -79,7 +86,7 @@ const updateTask = async (req, res) => {
 // Delete a task by ID
 const deleteTask = async (req, res) => {
   try {
-    const taskId = req.params.id;
+    const taskId = req.params.taskId;
     
     // Check if the task exists
     const task = await Task.findById(taskId);

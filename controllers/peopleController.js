@@ -3,8 +3,8 @@ const People = require('../models/peopleModel');
 // Create a new people record
 const createPeople = async (req, res) => {
   try {
-    const { customerName, projectName, taskStart, taskEnd, overdueDate, user, task, notifications } = req.body;
-    const people = new People({ customerName, projectName, taskStart, taskEnd, overdueDate, user, task, notifications });
+    const { customerName, projectName, taskStart, taskEnd, overdueDate} = req.body;
+    const people = new People({ customerName, projectName, taskStart, taskEnd, overdueDate });
     await people.save();
     res.status(201).json(people);
   } catch (error) {
@@ -75,6 +75,8 @@ const deletePeople = async (req, res) => {
 };
 
 // Get paginated list of people
+
+
 const getPeople = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -101,6 +103,6 @@ module.exports = {
   getAllPeople,
   getPeopleById,
   updatePeople,
-  deletePeople,
-  getPeople
+  deletePeople
+  // getPeople
 };

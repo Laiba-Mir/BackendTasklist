@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+// import bcrypt from 'bcryptjs';
+// import jwt from 'jsonwebtoken';
 
 const userSchema = new mongoose.Schema({
   role: {

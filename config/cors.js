@@ -2,7 +2,7 @@
 const cors = require("cors");
 
 // Define whitelist of allowed origins
-const whitelist = ["http://localhost:5174", "*"];
+const whitelist = ["http://localhost:5173", "*"];
 
 // Configure CORS options
 const corsOptions = {
@@ -16,3 +16,20 @@ const corsOptions = {
 };
 
 module.exports = cors(corsOptions);
+
+
+
+
+
+
+
+// const cors = require("cors");
+// // Define CORS options
+// const corsOptions = {
+//   origin: "http://localhost:5175",
+//   credentials: true // Allow credentials
+// };
+// // Create CORS middleware with options
+// const corsMiddleware = cors(corsOptions);
+// // Export the middleware
+// module.exports = corsMiddleware;

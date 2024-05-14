@@ -18,8 +18,8 @@ const peopleSchema = new mongoose.Schema({
     required: true
   },
   overdueDate: {
-    type: Date,
-    required: true
+    type: String,
+    
   },
   // user: {
   //   type: mongoose.Schema.Types.ObjectId,
